@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Level {
+  Level_Id     Int      @id @default(autoincrement())
+  Level_Title  String
+  Level_number Int
+  Player       Player[]
+
+  @@map("level")
+}
+
+model LevelScore {
+  id                    Int      @id @default(autoincrement())
+  player_id             Int
+  level_number          Int
+  highest_score         Int      @default(0)
+  latest_score          Int      @default(0)
+  updated_at            DateTime @default(now())
+  completion_percentage Float    @default(0)
+  stars                 Int      @default(0)
+  player                Player   @relation(fields: [player_id], references: [Player_ID])
+
+  @@unique([player_id, level_number])
+  @@index([player_id])
+  @@map("level_score")
+}
+
+model Milestone {
+  Milestone_Id             Int      @id @default(autoincrement())
+  Milestone_Title          String
+  Milestone_description    String
+  UnlockingLevel           Int
+  Milestone_Button_CTA     String
+  Milestone_Link           String
+  Milestone_reward_message String
+  Player                   Player[]
+
+  @@map("milestone")
+}
+
+model Player {
+  Player_ID    Int          @id @default(autoincrement())
+  Player_name  String?
+  Playerpoint  Int?         @default(0)
+  streak       Int?         @default(0)
+  lastLogin    DateTime?    @default(now())
+  Level_Id     Int?
+  Milestone_Id Int?
+  created_at   DateTime     @default(now())
+  email        String       @unique
+  Level        Level?       @relation(fields: [Level_Id], references: [Level_Id], map: "Player_Level_Id_fkey")
+  Milestone    Milestone?   @relation(fields: [Milestone_Id], references: [Milestone_Id], map: "Player_Milestone_Id_fkey")
+  level_scores LevelScore[]
+
+  @@index([Level_Id], map: "Player_Level_Id_fkey")
+  @@index([Milestone_Id], map: "Player_Milestone_Id_fkey")
+  @@map("player")
+}
+
+model PlayerHistory {
+  id              Int      @id @default(autoincrement())
+  player_id       Int
+  level_completed Int
+  score_gained    Int
+  timestamp       DateTime @default(now())
+
+  @@index([player_id])
+  @@map("player_history")
+}

@@ -1,0 +1,57 @@
+import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
+
+export function middleware(req: NextRequest) {
+    const cookieStore = cookies();
+    const isLoggedIn = cookieStore.get("LoggedIn")?.value === "true";
+    const playerLevel = Number(cookieStore.get("PlayerLevel")?.value) || 0;
+
+    const { pathname } = req.nextUrl;
+
+    // Debug logging
+    console.log('Middleware check:', {
+        isLoggedIn,
+        playerLevel,
+        pathname
+    });
+
+    if (isLoggedIn && pathname === "/quiz") {
+        return NextResponse.redirect(new URL("/profile", req.url));
+    }
+
+    if (!isLoggedIn && pathname === "/profile") {
+        return NextResponse.redirect(new URL("/quiz", req.url));
+    }
+
+    // If user tries to access /quiz/[level], enforce level restriction
+    const levelMatch = pathname.match(/^\/quiz\/(\d+)$/);
+
+    if (levelMatch) {
+        const requestedLevel = Number(levelMatch[1]);
+        
+        // Debug logging
+        console.log('Level access check:', {
+            requestedLevel,
+            playerLevel,
+            isLoggedIn
+        });
+
+        if (!isLoggedIn && requestedLevel !== 1) {
+            // Non-logged in users can only access level 1
+            console.log('Redirecting non-logged in user to level 1');
+            return NextResponse.redirect(new URL("/quiz/1", req.url));
+        } else if (isLoggedIn && requestedLevel > playerLevel + 1) { 
+            // Logged in users can access their current level and the next level
+            console.log('Redirecting user to their current level');
+            return NextResponse.redirect(new URL(`/quiz/${playerLevel}`, req.url));
+        }
+        // Allow access to current level and all previous levels
+        console.log('Allowing access to level:', requestedLevel);
+    }
+
+    return NextResponse.next();
+}
+
+export const config = {
+    matcher: ["/quiz/:path*", "/profile"]
+};

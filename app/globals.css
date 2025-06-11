@@ -1,0 +1,504 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 16px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 0 24px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 32px;
+    }
+}
+
+html { 
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+
+    sans-serif;
+}
+
+.first-element-gradient {
+    @apply first:bg-gradient-to-r first:from-[#191A23] first:to-[#2A2B38] first:text-white p-8;
+}
+
+.quizSbtn {
+    @apply relative  px-6 py-3 text-sm font-bold rounded-lg shadow-sm transition-transform transform active:translate-y-1 border-b-4 text-gray-900 bg-gray-100 border-gray-300 hover:bg-gray-200;
+}
+
+.quizPbtn {
+    @apply bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300;
+}
+
+.title {
+    @apply text-4xl font-bold text-center text-gray-800;
+}
+
+.quizButton {
+    /* Default border styles */
+    border-width: 1px;
+    border-bottom-width: 3px;
+    
+    /* Disabled state */
+    transform: translateY(0);
+    border-color: #d1d5db; /* equivalent to border-gray-200 */
+  }
+  
+  /* Hover state with border color */
+  .quizButton:hover {
+    border-color: #60a5fa; /* equivalent to border-blue-400 */
+  }
+  
+  /* Disabled state */
+  .quizButton:disabled {
+    transform: translateY(0);
+    border-color: #d1d5db; /* equivalent to border-gray-200 */
+  }
+  
+
+
+  .cQuizButton {
+    /* Default border and background styles */
+    border-width: 1px;
+    border-bottom-width: 3px;
+    border-color: #34d399; /* equivalent to border-green-400 */
+    background-color: #d1fae5; /* equivalent to bg-green-100 */
+    
+    /* Disabled state */
+    transform: translateY(0);
+  }
+  
+  /* Hover state with border color */
+  .cQuizButton:hover {
+    border-color: #60a5fa; /* equivalent to border-blue-400 */
+  }
+  
+  /* Disabled state */
+  .cQuizButton:disabled {
+    transform: translateY(0);
+    border-color: #6ee7b7; /* equivalent to border-green-500 */
+    background-color: #d1fae5; /* equivalent to bg-green-100 */
+  }
+  
+
+
+  .FquizButton {
+    /* Default border and background styles */
+    border-width: 1px;
+    border-bottom-width: 3px;
+    border-color: #f87171; /* equivalent to border-red-400 */
+    background-color: #fee2e2; /* equivalent to bg-red-100 */
+    
+    /* Disabled state */
+    transform: translateY(0);
+  }
+  
+  /* Hover state with border color */
+  .FquizButton:hover {
+    border-color: #60a5fa; /* equivalent to border-blue-400 */
+  }
+  
+  /* Disabled state */
+  .FquizButton:disabled {
+    transform: translateY(0);
+    border-color: #fca5a5; /* equivalent to border-red-500 */
+    background-color: #fee2e2; /* equivalent to bg-red-100 */
+  }
+  
+
+  .selectedQBtn {
+    /* Default border style */
+    border-width: 1px;
+    border-bottom-width: 3px;
+    border-color: #60a5fa; /* equivalent to border-blue-400 */
+    background-color: #ebf8ff;
+    /* Disabled state */
+    transform: translateY(0);
+  }
+  
+  /* Hover state with border color */
+  .selectedQBtn:hover {
+    border-color: #60a5fa; /* equivalent to border-blue-400 */
+  }
+  
+  /* Disabled state */
+  .selectedQBtn:disabled {
+    transform: translateY(0);
+    border-color: #d1d5db; /* equivalent to border-gray-400 */
+  }
+  
+@layer utilities {
+  .animate-shine {
+    animation: shine 2s infinite;
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-number-increment {
+    animation: numberIncrement 1s ease-out forwards;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientMove 3s ease infinite;
+  }
+
+  .animate-pop {
+    animation: pop 0.3s ease-out forwards;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  .animate-sparkle {
+    animation: sparkle 3s ease-in-out infinite;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-rotate-shine {
+    animation: rotateShine 4s linear infinite;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSoft 3s ease-in-out infinite;
+  }
+
+  .hover-lift {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  .reward-box-float {
+    animation: rewardFloat 3s ease-in-out infinite;
+  }
+
+  @keyframes shine {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      transform: scale(0.97);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes numberIncrement {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
+    }
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes slideInRight {
+    0% {
+      transform: translateX(15px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-15px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes rotateShine {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes bounceSoft {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  @keyframes rewardFloat {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  /* Milestone card specific animations */
+  .milestone-card {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .milestone-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent;
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+
+  .milestone-card:hover::before {
+    transform: translateX(100%);
+  }
+
+  .milestone-stats {
+    @apply transition-transform duration-300;
+  }
+
+  .milestone-stats:hover {
+    transform: scale(1.05);
+  }
+
+  /* Profile section specific styles */
+  .profile-card {
+    @apply relative overflow-hidden rounded-lg transition-all duration-300;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  }
+
+  .profile-card::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent;
+    transform: translateX(-100%);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .profile-card:hover::before {
+    transform: translateX(100%);
+  }
+
+  .stats-value {
+    @apply relative transition-all duration-300;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  .stats-value::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 transition-transform duration-300;
+  }
+
+  .stats-value:hover::after {
+    transform: scale-x-1;
+  }
+
+  .milestone-glow {
+    @apply relative;
+  }
+
+  .milestone-glow::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg;
+    background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .milestone-glow:hover::before {
+    opacity: 1;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .bg-grid-white\/10 {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+
+  /* Reward progress bar animations */
+  @keyframes progressPulse {
+    0% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scaleY(1.1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  .progress-bar-animate {
+    animation: progressPulse 2s ease-in-out infinite;
+  }
+}
+  
